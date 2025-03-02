@@ -1,6 +1,6 @@
 import { COUNTRIES } from "./countries.js"
 const getRandomCountry = () =>
-    COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)]
+  COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)]
 const country = getRandomCountry()
 
 export const SYSTEM_PROMPT = `Generate a question for the country: **${country}**. Options must have country names to guess. Format the output as valid JSON:
