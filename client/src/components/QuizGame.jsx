@@ -21,7 +21,6 @@ const QuizGame = ({ username, onScoreUpdate }) => {
   const [trivia, setTrivia] = useState([])
   const [loading, setLoading] = useState(true)
 
-  // Fetch a new question
   const fetchNewQuestion = async () => {
     setLoading(true)
     setSelectedAnswer(null)
@@ -42,12 +41,10 @@ const QuizGame = ({ username, onScoreUpdate }) => {
     }
   }
 
-  // Initialize with a question
   useEffect(() => {
     fetchNewQuestion()
   }, [])
 
-  // Check if the selected answer is correct
   const checkAnswer = async answer => {
     try {
       const res = await axios.post(
@@ -62,10 +59,8 @@ const QuizGame = ({ username, onScoreUpdate }) => {
       setFunFact(res.data.fun_fact || "No fun fact available.")
       setTrivia(res.data.trivia || [])
 
-      // Update score correctly
-      onScoreUpdate(res.data.correct ? 1 : 0) // Pass 1 for correct, 0 for incorrect
+      onScoreUpdate(res.data.correct ? 1 : 0)
 
-      // Trigger confetti for correct answer
       if (res.data.correct) {
         confetti({
           particleCount: 100,
@@ -80,7 +75,7 @@ const QuizGame = ({ username, onScoreUpdate }) => {
 
   const handleAnswerSelect = answer => {
     setSelectedAnswer(answer)
-    checkAnswer(answer) // Now it only calls API when an answer is selected
+    checkAnswer(answer)
   }
 
   const handleNextQuestion = () => {
