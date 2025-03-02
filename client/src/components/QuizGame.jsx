@@ -30,7 +30,9 @@ const QuizGame = ({ username, onScoreUpdate }) => {
     setTrivia([])
 
     try {
-      const res = await axios.get("http://localhost:8080/question")
+      const res = await axios.get(
+        "https://globetrotter-0mru.onrender.com/question"
+      )
       setCurrentQuestion(res.data)
       setOptions(res.data.options)
     } catch (error) {
@@ -48,9 +50,12 @@ const QuizGame = ({ username, onScoreUpdate }) => {
   // Check if the selected answer is correct
   const checkAnswer = async answer => {
     try {
-      const res = await axios.post("http://localhost:8080/answer", {
-        answer,
-      })
+      const res = await axios.post(
+        "https://globetrotter-0mru.onrender.com/answer",
+        {
+          answer,
+        }
+      )
 
       setIsCorrect(res.data.correct)
       setCorrectAnswer(res.data.correctAnswer)
